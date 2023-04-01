@@ -15,5 +15,5 @@
 For support, email puttipong.dou@gmail.com or join our Slack channel.
 
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://drive.google.com/file/d/1NNTkmoeHWmqP4tFjwTLUdyEHd53kN8hB/view?usp=share_link)
 
