@@ -3,8 +3,7 @@
 
 
 ## Tech Stack
-**Client:** Javascript, Bootstrap CSS
-**Server:** Node, Express
+**Client:** Javascript, Bootstrap CSS, Dart
 
 
 ## Authors
