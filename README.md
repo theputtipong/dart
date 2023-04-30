@@ -3,11 +3,11 @@
 
 
 ## Tech Stack
-**Client:** Javascript, Bootstrap CSS, Dart
+**Client:** Dart, Kotlin, Swift, Javascript, Bootstrap CSS, C++
 
 
 ## Authors
-- [@theputtipong](https://www.github.com/octokatherine)
+- [@theputtipong](https://github.com/theputtipong)
 
 
 ## Support
