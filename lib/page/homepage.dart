@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/counter_cubit.dart';
 
 class Homepage extends StatefulWidget {
   final String title;
@@ -10,18 +12,11 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   String? _title;
-  int _counter = 0;
 
   @override
   void initState() {
     _title = widget.title;
     super.initState();
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
@@ -30,19 +25,36 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         title: Text(_title ?? ''),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text('$_counter'),
-          ],
-        ),
+      body: BlocBuilder<CounterCubit, int>(
+        builder: (context, count) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('You have pushed the button this many times:'),
+                Text('$count'),
+              ],
+            ),
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            onPressed: () => context.read<CounterCubit>().increment(),
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          FloatingActionButton(
+            onPressed: () => context.read<CounterCubit>().decrement(),
+            tooltip: 'Decrement',
+            child: const Icon(Icons.remove),
+          ),
+        ],
       ),
     );
   }
