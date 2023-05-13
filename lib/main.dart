@@ -1,8 +1,7 @@
-import 'package:dart/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'page/homepage.dart';
+import 'routers/routers.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -14,16 +13,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<CounterCubit>(
-          create: (BuildContext context) => CounterCubit(),
-        ),
-      ],
-      child: MaterialApp(
+      providers: const [],
+      child: MaterialApp.router(
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Homepage(title: 'Flutter Web Demo Homepage'),
+        routerConfig: routerPages,
       ),
     );
   }
