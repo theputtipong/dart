@@ -30,21 +30,21 @@ final GoRouter routerPages = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) => const LoginPage(),
+      builder: (BuildContext context, GoRouterState state) => const HomePage(),
       pageBuilder: (context, state) => RouterTransitionFactory.getTransitionPage(
         context: context,
         state: state,
-        child: const LoginPage(),
+        child: const HomePage(),
         type: 'fade',
       ),
       routes: <RouteBase>[
         GoRoute(
-          path: 'homepage',
-          builder: (BuildContext context, GoRouterState state) => const HomePage(),
+          path: 'login',
+          builder: (BuildContext context, GoRouterState state) => const LoginPage(),
           pageBuilder: (context, state) => RouterTransitionFactory.getTransitionPage(
             context: context,
             state: state,
-            child: const HomePage(),
+            child: const LoginPage(),
             type: 'fade',
           ),
         ),

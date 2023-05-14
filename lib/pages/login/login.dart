@@ -18,8 +18,8 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: () => context.go('/homepage'),
-              child: const Text('Go to the Home page'),
+              onPressed: () => context.go('/'),
+              child: const Text('Go to the Home screen'),
             ),
           ],
         ),

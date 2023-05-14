@@ -18,8 +18,8 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <ElevatedButton>[
             ElevatedButton(
-              onPressed: () => context.go('/'),
-              child: const Text('Go back to the Home screen'),
+              onPressed: () => context.go('/login'),
+              child: const Text('Login'),
             ),
           ],
         ),
