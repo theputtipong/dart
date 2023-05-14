@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../pages/homes/home.dart';
-import '../pages/login/login.dart';
+import '../pages/homes/home_page.dart';
+import '../pages/login/login_page.dart';
 
 class RouterTransitionFactory {
   static CustomTransitionPage getTransitionPage(
