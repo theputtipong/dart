@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../models/login_model.dart';
+import '../../styles/assets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -72,7 +73,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
               ElevatedButton(
                 onPressed: () => context.go('/'),
-                child: const Text('Login'),
+                child: const SizedBox(
+                  width: 150,
+                  child: Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -82,27 +89,19 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.facebook_rounded,
-                      size: 30,
-                    ),
-                    color: Colors.blueAccent,
+                    icon: Image.asset(facebookIcon),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.facebook_rounded,
-                      size: 30,
-                    ),
-                    color: Colors.blueAccent,
+                    icon: Image.asset(googleIcon),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.facebook_rounded,
-                      size: 30,
-                    ),
-                    color: Colors.blueAccent,
+                    icon: Image.asset(tiktokIcon),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(twitterIcon),
                   ),
                 ],
               )
