@@ -41,9 +41,16 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 focusNode: _user,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person_rounded),
+                  prefixIcon: Icon(
+                    Icons.person_rounded,
+                    color: Colors.grey,
+                  ),
                   filled: false,
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  hintText: 'username',
+                  hintStyle: TextStyle(color: Colors.grey),
                 ),
                 restorationId: 'user_field',
                 onSaved: (value) {
@@ -57,9 +64,16 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 focusNode: _pass,
                 decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock_rounded),
+                  prefixIcon: Icon(
+                    Icons.lock_rounded,
+                    color: Colors.grey,
+                  ),
                   filled: false,
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  hintText: 'password',
+                  hintStyle: TextStyle(color: Colors.grey),
                 ),
                 restorationId: 'pass_field',
                 onFieldSubmitted: (value) {
@@ -69,20 +83,22 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               ElevatedButton(
                 onPressed: () => context.go('/'),
                 child: const SizedBox(
-                  width: 150,
-                  child: Text(
-                    'Login',
-                    textAlign: TextAlign.center,
+                  width: 100,
+                  height: 40,
+                  child: Center(
+                    child: Text(
+                      'Login',
+                    ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,15 +109,27 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Image.asset(googleIcon),
-                  ),
-                  IconButton(
-                    onPressed: () {},
                     icon: Image.asset(tiktokIcon),
                   ),
                   IconButton(
                     onPressed: () {},
                     icon: Image.asset(twitterIcon),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(lineIcon),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(googleIcon),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(microsoftIcon),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Image.asset(linkedinIcon),
                   ),
                 ],
               )

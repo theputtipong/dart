@@ -28,6 +28,26 @@ class MainApp extends StatelessWidget {
       ),
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            side: MaterialStateProperty.resolveWith<BorderSide>(
+              (states) => const BorderSide(color: Colors.white),
+            ),
+            backgroundColor: MaterialStateProperty.resolveWith<Color>((states) => Colors.black),
+            shape: MaterialStateProperty.resolveWith<OutlinedBorder>((_) {
+              return RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              );
+            }),
+            // textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+            //   (states) => const TextStyle(color: Colors.black),
+            // ),
+          ),
+        ),
+        // textTheme: Theme.of(context).textTheme.apply(
+        //       bodyColor: Colors.black,
+        //       displayColor: Colors.black,
+        //     ),
       ),
       debugShowCheckedModeBanner: false,
     );
