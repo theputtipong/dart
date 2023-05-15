@@ -24,12 +24,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
-        actions: [IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded))],
+        actions: [
+          IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded)),
+        ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [loginData != null ? Text('This Home page user ${loginData?.user}') : const Text('This Home page')],
+          children: [
+            loginData != null ? Text('This Home page user ${loginData?.user}') : const Text('This Home page'),
+          ],
         ),
       ),
     );
