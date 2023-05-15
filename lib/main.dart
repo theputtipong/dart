@@ -28,6 +28,7 @@ class MainApp extends StatelessWidget {
       ),
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             side: MaterialStateProperty.resolveWith<BorderSide>(

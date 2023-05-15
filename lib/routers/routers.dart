@@ -1,3 +1,4 @@
+import 'package:dart/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/homes/home_page.dart';
@@ -30,16 +31,24 @@ final GoRouter routerPages = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) => const HomePage(),
-      pageBuilder: (context, state) => RouterTransitionFactory.getTransitionPage(
-        context: context,
-        state: state,
-        child: const HomePage(),
-        type: 'fade',
-      ),
+      name: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        LoginModel loginData = state.extra as LoginModel;
+        return HomePage(loginData: loginData);
+      },
+      pageBuilder: (context, state) {
+        LoginModel loginData = state.extra as LoginModel;
+        return RouterTransitionFactory.getTransitionPage(
+          context: context,
+          state: state,
+          child: HomePage(loginData: loginData),
+          type: 'fade',
+        );
+      },
       routes: <RouteBase>[
         GoRoute(
           path: 'login',
+          name: 'login',
           builder: (BuildContext context, GoRouterState state) => const LoginPage(),
           pageBuilder: (context, state) => RouterTransitionFactory.getTransitionPage(
             context: context,

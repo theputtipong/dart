@@ -11,13 +11,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late LoginModel login;
+  late LoginModel loginData;
   late FocusNode _user, _pass;
 
   @override
   void initState() {
     super.initState();
-    login = LoginModel();
+    loginData = LoginModel();
     _user = FocusNode();
     _pass = FocusNode();
   }
@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: SizedBox(
           width: 300,
@@ -53,9 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
                 restorationId: 'user_field',
-                onSaved: (value) {
-                  login.user = value;
-                  _pass.requestFocus();
+                onChanged: (value) {
+                  loginData.user = value;
+                  // _pass.requestFocus();
                 },
               ),
               const SizedBox(
@@ -76,17 +77,15 @@ class _LoginPageState extends State<LoginPage> {
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
                 restorationId: 'pass_field',
-                onFieldSubmitted: (value) {
-                  setState(() {
-                    login.pass = value;
-                  });
+                onChanged: (value) {
+                  loginData.pass = value;
                 },
               ),
               const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () => context.go('/'),
+                onPressed: () => context.goNamed('/', extra: loginData),
                 child: const SizedBox(
                   width: 100,
                   height: 40,
