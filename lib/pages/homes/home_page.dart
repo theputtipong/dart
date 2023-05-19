@@ -1,6 +1,7 @@
 import 'package:dart/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../widgets/appbar.dart';
 
 class HomePage extends StatefulWidget {
   final LoginModel? loginData;
@@ -22,8 +23,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
+      appBar: widgetsAppbar(
+        context,
+        null,
         actions: [
           IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded)),
         ],

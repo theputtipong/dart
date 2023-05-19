@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../models/login_model.dart';
 import '../../styles/assets.dart';
+import '../../widgets/appbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,9 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    prepareVariable();
+  }
+
+  void prepareVariable() {
     loginData = LoginModel();
     _user = FocusNode();
     _pass = FocusNode();
+    _user.requestFocus();
   }
 
   @override
@@ -32,69 +38,100 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: widgetsAppbar(context, loginData),
       body: Center(
         child: SizedBox(
           width: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                focusNode: _user,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.person_rounded,
-                    color: Colors.grey,
-                  ),
-                  filled: false,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  hintText: 'username',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-                restorationId: 'user_field',
-                onChanged: (value) {
-                  loginData.user = value;
-                  // _pass.requestFocus();
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                focusNode: _pass,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.lock_rounded,
-                    color: Colors.grey,
-                  ),
-                  filled: false,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  hintText: 'password',
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-                restorationId: 'pass_field',
-                onChanged: (value) {
-                  loginData.pass = value;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () => context.goNamed('/', extra: loginData),
-                child: const SizedBox(
-                  width: 100,
-                  height: 40,
-                  child: Center(
-                    child: Text(
-                      'Login',
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    height: 120,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: TextFormField(
+                            focusNode: _user,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.person_rounded,
+                                color: Colors.grey,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              filled: false,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                              hintText: 'username',
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
+                            restorationId: 'user_field',
+                            onChanged: (value) {
+                              loginData.user = value;
+                            },
+                            onFieldSubmitted: (value) => _pass.requestFocus(),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: 200,
+                          child: TextFormField(
+                            focusNode: _pass,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.lock_rounded,
+                                color: Colors.grey,
+                              ),
+                              filled: false,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                              hintText: 'password',
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
+                            restorationId: 'pass_field',
+                            onChanged: (value) {
+                              loginData.pass = value;
+                            },
+                            onFieldSubmitted: (value) => loginEvent(context),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 120,
+                    width: 75,
+                    child: ElevatedButton(
+                      onPressed: () => loginEvent(context),
+                      child: const SizedBox(
+                        width: 100,
+                        height: 40,
+                        child: Center(
+                          child: Text(
+                            'Login',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -136,6 +173,17 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+      persistentFooterButtons: const [
+        SizedBox(
+          height: 50,
+          child: Center(
+            child: Text('Copyright © 2022 Pdouvch'),
+          ),
+        )
+      ],
+      persistentFooterAlignment: AlignmentDirectional.center,
     );
   }
+
+  void loginEvent(BuildContext context) => context.goNamed('/', extra: loginData);
 }
