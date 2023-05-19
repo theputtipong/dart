@@ -1,6 +1,8 @@
 import 'package:dart/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../cache/login_cache.dart';
+import '../../services/logger.dart';
 import '../../widgets/appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    loginData = widget.loginData;
     super.initState();
+    prepareVariable().whenComplete(() => setState(() {}));
+  }
+
+  Future prepareVariable() async {
+    widget.loginData != null
+        ? loginData = widget.loginData
+        : await readLoginData().then((value) {
+            loggerDebug('readLoginData $value');
+            if (value != null) loginData = loginModelFromJson(value);
+          });
   }
 
   @override
@@ -27,7 +38,17 @@ class _HomePageState extends State<HomePage> {
         context,
         null,
         actions: [
-          IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded)),
+          loginData != null
+              ? TextButton.icon(
+                  onPressed: () async {
+                    // context.goNamed('profile');
+                    await clearLoginData().then((value) {
+                      context.pushNamed('/');
+                    });
+                  },
+                  icon: const Icon(Icons.person_rounded),
+                  label: Text('User ${loginData?.user}'.toUpperCase()))
+              : IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded))
         ],
       ),
       body: Center(

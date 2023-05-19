@@ -30,8 +30,11 @@ class MainApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
-          iconTheme: IconThemeData(color: Colors.white),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        primaryColor: Colors.white,
+        iconButtonTheme: IconButtonThemeData(
+            style: ButtonStyle(iconColor: MaterialStateProperty.resolveWith<Color>((states) => Colors.white))),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             side: MaterialStateProperty.resolveWith<BorderSide>(
@@ -43,15 +46,15 @@ class MainApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               );
             }),
-            // textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            //   (states) => const TextStyle(color: Colors.black),
-            // ),
+            textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+              (states) => const TextStyle(color: Colors.black),
+            ),
           ),
         ),
-        // textTheme: Theme.of(context).textTheme.apply(
-        //       bodyColor: Colors.black,
-        //       displayColor: Colors.black,
-        //     ),
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Colors.black,
+              displayColor: Colors.black,
+            ),
       ),
       debugShowCheckedModeBanner: false,
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../cache/login_cache.dart';
 import '../../models/login_model.dart';
 import '../../styles/assets.dart';
 import '../../widgets/appbar.dart';
@@ -18,10 +19,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    prepareVariable();
+    prepareVariable().whenComplete(() => setState(() {}));
   }
 
-  void prepareVariable() {
+  Future prepareVariable() async {
     loginData = LoginModel();
     _user = FocusNode();
     _pass = FocusNode();
@@ -185,5 +186,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void loginEvent(BuildContext context) => context.goNamed('/', extra: loginData);
+  Future<void> loginEvent(BuildContext context) async =>
+      await cacheLoginData(loginData).then((value) => context.pushNamed('/', extra: loginData));
 }
