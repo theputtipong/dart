@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'configs/timezone.dart';
+import 'providers/login_provider.dart';
 import 'routers/routers.dart';
 
 void main() {
@@ -18,7 +20,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: routerPages,
       builder: (context, child) => ResponsiveBreakpoints.builder(
-        child: child!,
+        child: MultiProvider(providers: [
+          Provider<ValueLoginData>(create: (_) => ValueLoginData()),
+        ], child: child!),
         breakpoints: [
           const Breakpoint(start: 0, end: 450, name: MOBILE),
           const Breakpoint(start: 451, end: 800, name: TABLET),

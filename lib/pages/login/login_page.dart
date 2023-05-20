@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../cache/login_cache.dart';
+import '../../prefs/login_cache.dart';
 import '../../models/login_model.dart';
 import '../../styles/assets.dart';
 import '../../widgets/appbar.dart';
@@ -187,5 +187,5 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> loginEvent(BuildContext context) async =>
-      await cacheLoginData(loginData).then((value) => context.pushNamed('/', extra: loginData));
+      await prefsSetLogin(loginData).then((value) => context.pushNamed('/', extra: loginData));
 }

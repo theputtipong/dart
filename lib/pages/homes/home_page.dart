@@ -1,7 +1,7 @@
 import 'package:dart/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../cache/login_cache.dart';
+import '../../prefs/login_cache.dart';
 import '../../services/logger.dart';
 import '../../widgets/appbar.dart';
 
@@ -25,8 +25,8 @@ class _HomePageState extends State<HomePage> {
   Future prepareVariable() async {
     widget.loginData != null
         ? loginData = widget.loginData
-        : await readLoginData().then((value) {
-            loggerDebug('readLoginData $value');
+        : await prefsGetLogin().then((value) {
+            loggerDebug('prefsGetLogin $value');
             if (value != null) loginData = loginModelFromJson(value);
           });
   }
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               ? TextButton.icon(
                   onPressed: () async {
                     // context.goNamed('profile');
-                    await clearLoginData().then((value) {
+                    await prefsClearLogin().then((value) {
                       context.pushNamed('/');
                     });
                   },
