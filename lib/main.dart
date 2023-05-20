@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       routerConfig: routerPages,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: MultiProvider(providers: [
-          Provider<ValueLoginData>(create: (_) => ValueLoginData()),
+          ChangeNotifierProvider(create: (_) => ValueLoginData()),
         ], child: child!),
         breakpoints: [
           const Breakpoint(start: 0, end: 450, name: MOBILE),

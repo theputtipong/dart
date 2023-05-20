@@ -1,7 +1,10 @@
 // Obtain shared preferences.
 import 'package:dart/models/login_model.dart';
 import 'package:dart/services/logger.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../providers/login_provider.dart';
 
 Future<SharedPreferences> getPrefs() async {
   return await SharedPreferences.getInstance();

@@ -6,7 +6,7 @@ import '../prefs/login_cache.dart';
 class ValueLoginData with ChangeNotifier, DiagnosticableTreeMixin {
   LoginModel? loginData;
 
-  LoginModel? get count => loginData;
+  LoginModel? get value => loginData;
 
   Future<void> setValue() async {
     var tempValue = await prefsGetLogin();
@@ -21,4 +21,9 @@ class ValueLoginData with ChangeNotifier, DiagnosticableTreeMixin {
   checkValue() async => await prefsCheckLogin().then((value) {
         return value;
       });
+
+  clearValue() async {
+    loginData = null;
+    notifyListeners();
+  }
 }

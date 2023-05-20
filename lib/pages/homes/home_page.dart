@@ -1,7 +1,9 @@
 import 'package:dart/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../prefs/login_cache.dart';
+import '../../providers/login_provider.dart';
 import '../../services/logger.dart';
 import '../../widgets/appbar.dart';
 
@@ -18,8 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    context.read<ValueLoginData>().setValue();
     super.initState();
-    prepareVariable().whenComplete(() => setState(() {}));
+    // prepareVariable().whenComplete(() => setState(() {}));
   }
 
   Future prepareVariable() async {
@@ -33,30 +36,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widgetsAppbar(
-        context,
-        null,
-        actions: [
-          loginData != null
-              ? TextButton.icon(
-                  onPressed: () async {
-                    // context.goNamed('profile');
-                    await prefsClearLogin().then((value) {
-                      context.pushNamed('/');
-                    });
-                  },
-                  icon: const Icon(Icons.person_rounded),
-                  label: Text('User ${loginData?.user}'.toUpperCase()))
-              : IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded))
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            loginData != null ? Text('This Home page user ${loginData?.user}') : const Text('This Home page'),
+    return Consumer<ValueLoginData>(
+      builder: (context, loginValue, child) => Scaffold(
+        appBar: widgetsAppbar(
+          context,
+          null,
+          actions: [
+            loginValue.value != null
+                ? TextButton.icon(
+                    onPressed: () async {
+                      // context.goNamed('profile');
+                      await prefsClearLogin().then((value) {
+                        // context.read<ValueLoginData>().clearValue();
+                        context.pushNamed('/');
+                      });
+                    },
+                    icon: const Icon(Icons.person_rounded),
+                    label: Text('User ${loginValue.value?.user}'.toUpperCase()))
+                : IconButton(onPressed: () => context.goNamed('login'), icon: const Icon(Icons.login_rounded))
           ],
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              loginValue.value != null
+                  ? Text('This Home page user ${loginValue.value?.user}')
+                  : const Text('This Home page'),
+            ],
+          ),
         ),
       ),
     );
